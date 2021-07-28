@@ -47,7 +47,7 @@ function Card({ item, index }) {
         <Button
           colorScheme="red"
           size="xs"
-          onClick={() => dispatch(deleteItem(item.id))}
+          onClick={() => dispatch(deleteItem(index))}
         >
           Delete
         </Button>

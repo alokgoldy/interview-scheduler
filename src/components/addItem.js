@@ -1,5 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { Button, HStack, Input, useToast } from '@chakra-ui/react';
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Button,
+  useToast,
+  Input,
+  FormControl,
+  FormLabel,
+  useDisclosure,
+} from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem, updateItem } from '../action/actions';
 
@@ -13,7 +27,9 @@ function AddItem() {
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
   const [buttonValue, setButtonValue] = useState('Schedule');
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const initialRef = React.useRef();
   useEffect(() => {
     if (currentIndex !== -1) {
       setName(updateCandidate[currentIndex].name);
@@ -51,35 +67,57 @@ function AddItem() {
     setDate('');
     setTime('');
     setButtonValue('Schedule');
+    onClose();
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <HStack mt="8">
-        <Input
-          variant="filled"
-          placeholder="Enter Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <Input
-          type="date"
-          variant="filled"
-          placeholder="Date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-        />
-        <Input
-          type="time"
-          variant="filled"
-          value={time}
-          onChange={(e) => setTime(e.target.value)}
-        />
-        <Button colorScheme="pink" px="8" type="submit">
-          {buttonValue}
-        </Button>
-      </HStack>
-    </form>
+    <>
+      <Button onClick={onOpen}>{buttonValue}</Button>
+
+      <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Create your account</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody pb={6}>
+            <FormControl>
+              <FormLabel>First name</FormLabel>
+              <Input
+                ref={initialRef}
+                placeholder="First name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </FormControl>
+            <FormControl mt={4}>
+              <FormLabel>Last name</FormLabel>
+              <Input
+                type="date"
+                placeholder="Date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+              />
+            </FormControl>
+            <FormControl mt={4}>
+              <FormLabel>Last name</FormLabel>
+              <Input
+                type="time"
+                placeholder="Time"
+                value={time}
+                onChange={(e) => setTime(e.target.value)}
+              />
+            </FormControl>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={handleSubmit}>
+              Save
+            </Button>
+            <Button onClick={onClose}>Cancel</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
   );
 }
 

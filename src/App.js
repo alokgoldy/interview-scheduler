@@ -7,6 +7,7 @@ import {
   Wrap,
   WrapItem,
   Stack,
+  Spacer,
 } from '@chakra-ui/react';
 import { FaSun, FaMoon } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
@@ -44,6 +45,7 @@ function App() {
       >
         Interview Scheduler
       </Heading>
+      <Spacer />
       <AddItem />
       <Stack p={4}>
         <Wrap spacing="30px" justify="center">
