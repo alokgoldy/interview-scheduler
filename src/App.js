@@ -8,6 +8,11 @@ import {
   WrapItem,
   Stack,
   Spacer,
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
 } from '@chakra-ui/react';
 import { FaSun, FaMoon } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
@@ -17,13 +22,6 @@ import './App.css';
 
 function App() {
   const { colorMode, toggleColorMode } = useColorMode();
-  // const [items, setItems] = useState(
-  //   () => JSON.parse(localStorage.getItem('items')) || []
-  // );
-
-  // useEffect(() => {
-  //   localStorage.setItem('items', JSON.stringify(items));
-  // }, [items]);
 
   const candidates = useSelector((state) => state.item.candidates);
 
@@ -48,13 +46,36 @@ function App() {
       <Spacer />
       <AddItem />
       <Stack p={4}>
-        <Wrap spacing="30px" justify="center">
-          {candidates.map((item, index) => (
-            <WrapItem>
-              <Card item={item} index={index} />
-            </WrapItem>
-          ))}
-        </Wrap>
+        <Tabs isFitted variant="enclosed">
+          <TabList mb="1em">
+            <Tab>Upcoming</Tab>
+            <Tab>Completed</Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel>
+              <Wrap spacing="30px" justify="center">
+                {candidates
+                  .filter((item) => item.completed === false)
+                  .map((item, index) => (
+                    <WrapItem>
+                      <Card item={item} index={index} />
+                    </WrapItem>
+                  ))}
+              </Wrap>
+            </TabPanel>
+            <TabPanel>
+              <Wrap spacing="30px" justify="center">
+                {candidates
+                  .filter((item) => item.completed === true)
+                  .map((item, index) => (
+                    <WrapItem>
+                      <Card item={item} index={index} />
+                    </WrapItem>
+                  ))}
+              </Wrap>
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
       </Stack>
     </VStack>
   );

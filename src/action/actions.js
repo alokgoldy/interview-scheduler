@@ -3,6 +3,7 @@ import {
   UPDATE_INDEX,
   UPDATE_ITEM,
   DELETE_ITEM,
+  COMPLETE_ITEM,
 } from '../constants/types';
 
 export const addItem = (contact) => ({
@@ -23,4 +24,9 @@ export const updateItem = (contact) => ({
 export const deleteItem = (id) => ({
   type: DELETE_ITEM,
   payload: id,
+});
+
+export const completeItem = (value) => ({
+  type: COMPLETE_ITEM,
+  payload: value,
 });

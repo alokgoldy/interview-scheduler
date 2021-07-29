@@ -1,5 +1,6 @@
 import {
   ADD_ITEM,
+  COMPLETE_ITEM,
   DELETE_ITEM,
   UPDATE_INDEX,
   UPDATE_ITEM,
@@ -41,6 +42,13 @@ const itemReducer = (state = initialState, action) => {
       localStorage.setItem('candidates', JSON.stringify(list));
       return {
         currentIndex: -1,
+        candidates: JSON.parse(localStorage.getItem('candidates')),
+      };
+    case COMPLETE_ITEM:
+      list[state.currentIndex].completed = action.payload;
+      localStorage.setItem('candidates', JSON.stringify(list));
+      return {
+        ...state,
         candidates: JSON.parse(localStorage.getItem('candidates')),
       };
     default:
