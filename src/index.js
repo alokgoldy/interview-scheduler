@@ -5,7 +5,7 @@ import './index.css';
 import { Provider } from 'react-redux';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import store from './store';
+import store from './redux/store';
 
 const config = {
   initialColorMode: 'light',

@@ -12,7 +12,7 @@ import {
 import { FaUserAlt } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { deleteItem, updateIndex, completeItem } from '../action/actions';
+import { deleteItem, updateIndex, completeItem } from '../redux/action/actions';
 
 function Card({ item, index }) {
   const dispatch = useDispatch();

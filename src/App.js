@@ -54,24 +54,30 @@ function App() {
           <TabPanels>
             <TabPanel>
               <Wrap spacing="30px" justify="center">
-                {candidates
-                  .filter((item) => item.completed === false)
-                  .map((item, index) => (
-                    <WrapItem>
-                      <Card item={item} index={index} />
-                    </WrapItem>
-                  ))}
+                {candidates.map((item, index) => {
+                  if (item.completed === false) {
+                    return (
+                      <WrapItem>
+                        <Card item={item} index={index} />
+                      </WrapItem>
+                    );
+                  }
+                  return [];
+                })}
               </Wrap>
             </TabPanel>
             <TabPanel>
               <Wrap spacing="30px" justify="center">
-                {candidates
-                  .filter((item) => item.completed === true)
-                  .map((item, index) => (
-                    <WrapItem>
-                      <Card item={item} index={index} />
-                    </WrapItem>
-                  ))}
+                {candidates.map((item, index) => {
+                  if (item.completed === true) {
+                    return (
+                      <WrapItem>
+                        <Card item={item} index={index} />
+                      </WrapItem>
+                    );
+                  }
+                  return [];
+                })}
               </Wrap>
             </TabPanel>
           </TabPanels>

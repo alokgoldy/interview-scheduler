@@ -15,7 +15,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItem, updateIndex, updateItem } from '../action/actions';
+import { addItem, updateIndex, updateItem } from '../redux/action/actions';
 
 function AddItem() {
   const dispatch = useDispatch();
@@ -47,6 +47,7 @@ function AddItem() {
     setName('');
     setDate('');
     setTime('');
+    setEdit(false);
   }
   function handleSubmit(e) {
     e.preventDefault();
